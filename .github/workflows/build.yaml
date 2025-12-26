@@ -27,17 +27,23 @@ jobs:
         run: |
           tj3 --version
 
-      - name: List all files
+      #- name: List all files
+      #  run: |
+      #    find .
+      #    mkdir build
+      #    cat > build/index.html << EOF
+      #    <!doctype html>
+      #    <html>
+      #    <head> <title>This is the title of the webpage!</title> </head>
+      #    <body> <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> </body>
+      #    </html>
+      #    EOF
+
+      - name: Build Plan
         run: |
-          find .
           mkdir build
-          cat > build/index.html << EOF
-          <!doctype html>
-          <html>
-          <head> <title>This is the title of the webpage!</title> </head>
-          <body> <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> </body>
-          </html>
-          EOF
+          tj3 -o build/ src/building-project.tjp
+
       - name: Upload result as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
