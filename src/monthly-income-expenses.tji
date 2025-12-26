@@ -1,0 +1,158 @@
+
+task monthlyincome "Monthly Income" {
+    flags income
+    purge chargeset
+    chargeset income
+
+    task rentalkrismar1 "Krismar 1 Rental" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 54987.00 permonth
+      # 5 weeks permonth
+      charge 10997.4 perweek
+    }
+
+    task rentalkrismar2 "Krismar 2 Rental" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 54987.00 permonth
+      # 5 weeks permonth
+      charge 10997.4 perweek
+    }
+
+    task rentalkrismar3 "Krismar 3 Rental" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 54987.00 permonth
+      # 5 weeks permonth
+      charge 10997.4 perweek
+    }
+
+    task rentalsunshineplywoods "Sunshine Plywoods Rental" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 53361.00 permonth
+      # 5 weeks permonth
+      charge 10672.2 perweek
+    }
+
+    task rentalkrupatiles1 "Krupa Tiles - Grace Period - Rental" {
+      start ${projectstart}
+      duration 1m
+      # charge 43500.00 permonth
+      # 5 weeks permonth
+      charge 8700.00 perweek
+    }
+
+    task rentalkrupatiles2 "Krupa Tiles - Actual Rental" {
+      end ${projectend}
+      depends !rentalkrupatiles1
+      # charge 174000.00 permonth
+      # 5 weeks permonth
+      charge 34800.00 perweek
+    }
+
+    task rentalshankara1 "Shankara Constructions 1 - Rental" {
+      start ${projectstart}
+      duration 3m
+      # charge 34753.00 permonth
+      # 5 weeks permonth
+      charge 6950.60 perweek
+    }
+
+    task rentalshankara2 "Shankara Constructions 2 - Rental" {
+      start ${projectstart}
+      duration 3m
+      # charge 34753.00 permonth
+      # 5 weeks permonth
+      charge 6950.60 perweek
+    }
+
+    task rentalshankara3 "Shankara Constructions 3 - Rental" {
+      start ${projectstart}
+      duration 3m
+      # charge 34753.00 permonth
+      # 5 weeks permonth
+      charge 6950.60 perweek
+    }
+}
+
+
+task monthlyexpense "Monthly Expense" {
+    flags income
+    purge chargeset
+    chargeset livingexpenses
+
+    task living "Living Expenses" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 13000.00 permonth
+      # 5 weeks permonth
+      charge 2600.00 perweek
+    }
+
+    task propertytaxes "Property Taxes" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 54200.00 peryear
+      # 5 weeks permonth
+      charge 903.33 perweek
+    }
+
+    task miscexpense "Misc Expenses" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 50000.00 peryear
+      # 5 weeks permonth
+      charge 10000 perweek
+    }
+
+}
+
+task loanexpenses "Loans" {
+    flags income
+    purge chargeset
+    chargeset loan
+
+    task homeloan "Home Loan JP Nagar" {
+      start ${projectstart}
+      end ${projectend}
+      # charge 146054.00 permonth
+      # 5 weeks permonth
+      charge 29210.80 perweek
+    }
+
+    task acloan "AC Loan JP Nagar" {
+      start ${projectstart}
+      duration 6m
+      # charge 10000.00 permonth
+      # 5 weeks permonth
+      charge 2000.00 perweek
+    }
+
+    # Car payment 17.5 Lakh cost
+    # 3L downpayment
+    # 20k initial accesories cost
+    # results in 14.5L borrow, EMI of 30100 at 9% p.a interest
+
+    task carbooking "Car Booking" {
+      #start %{ ${projectstart} + 1m }
+      start ${projectstart}
+      #duration 2w
+      charge 20000.00 onstart
+    }
+
+    task cardownpayment "Car Downpayment" {
+      depends !carbooking
+      charge 300000.00 onstart
+    }
+
+    task carloan "Car Loan EMI" {
+      depends !cardownpayment
+      end ${projectend}
+      # charge 30100.00 permonth
+      # 5 weeks permonth
+      charge 6020.00 perweek
+    }
+
+}

@@ -1,0 +1,107 @@
+
+task savingscapital "capital" {
+  flags income
+  purge chargeset
+  chargeset capital
+
+  task savingsicicibank "Savings - ICICI Bank" {
+    start ${projectstart}
+    charge 520225.67 onstart
+  }
+
+  task savingsrinithejus "Savings - Thejus - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 224040.00 onstart
+  }
+
+  task fdsrinithejus1 "FD - 0251-60-101-020414 - Thejus - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 304488.00 onstart
+  }
+
+  task fdsrinithejus2 "FD - 0251-60-101-020427 - Thejus - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 1097829.00 onstart
+  }
+
+  task fdsrinithejus3 "FD - 0251-60-101-020332 - Thejus - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 635034.00 onstart
+  }
+
+  task savingsrinipushpa "Savings - Pushpa - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 1685681.00 onstart
+  }
+
+  task fdsrinipushpa1 "FD - 0251-60-101-020477 - Pushpa - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 352517.00 onstart
+  }
+
+  task fdsrinipushpa2 "FD - 0251-60-101-020428 - Pushpa - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 1101770.00 onstart
+  }
+
+  task fdsrinipushpa3 "FD - 0251-60-101-020413 - Pushpa - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 304862.00 onstart
+  }
+
+  task savingunionhemanth "Savings - Hemanth - Union Bank" {
+    start ${projectstart}
+    charge 52825.00 onstart
+  }
+
+  task fdunionhemanth1 "Flexi Deposits - Hemanth - Union Bank" {
+    start ${projectstart}
+    charge 6900000.00 onstart
+  }
+
+  task cashhome "Cash at home" {
+    start ${projectstart}
+    charge 8700000.00 onstart
+  }
+}
+
+task reservecapital "Reserve Capital" {
+  flags income
+  purge chargeset
+  chargeset reserve
+
+  task minbalicici "Minimum Balance - ICICI" {
+    start ${projectstart}
+    charge 5000.00 onstart
+  }
+
+  task minbalsrinithejus "Minimum Balance - Thejus - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 10000.00 onstart
+  }
+
+  task minbalsrinipushpa "Minimum Balance - Pushpa - Sreenidhi Bank" {
+    start ${projectstart}
+    charge 10000.00 onstart
+  }
+
+  task minbalunionhemanth "Minimum Balance - Hemanth - Union Bank" {
+    start ${projectstart}
+    charge 10000.00 onstart
+  }
+
+  task medicalresv "Medical Buffer" {
+    start ${projectstart}
+    charge 100000.00 onstart
+  }
+
+  task homeloanemiresv "Home Loan EMI Buffer" {
+    start ${projectstart}
+    charge 438162.00 onstart
+  }
+
+  task advshankara "Advance Shankara" {
+    depends !!monthlyincome.rentalshankara3
+    charge 800000.00 onstart
+  }
+}

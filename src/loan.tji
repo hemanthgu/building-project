@@ -1,0 +1,32 @@
+
+task advancecapital "Advance Future Rental" {
+  flags income
+  purge chargeset
+  chargeset advance
+  start %{${projectstart} + 12m}
+  charge 20000000.00 onstart
+}
+
+task loancapital "Loan Capital" {
+  flags income
+  purge chargeset
+  chargeset loaninput
+
+  #start %{${projectstart} + 13m}
+  start %{${projectstart} + 9m}
+  #charge 9500000.00 onstart
+  charge 17000000.00 onstart
+}
+
+task loanint "Loan Intereset" {
+  flags income
+  purge chargeset
+  chargeset loaninterest
+
+  start %{${projectstart} + 9m}
+  end ${projectend}
+
+  # charge 200000.00 permonth
+  # 5 weeks per month
+  charge 40000.00 perweek
+}

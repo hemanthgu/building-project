@@ -1,0 +1,108 @@
+navigator navbar {
+  hidereport @none
+}
+
+textreport frame "indexframe" {
+  header -8<-
+    == Commercial Space ==
+    <[navigator id="navbar"]>
+  ->8-
+  footer "----"
+  textreport index "index" {
+    formats html
+    center '<[report id="public"]>'
+  }
+
+  #textreport cashflow "Profit and Loss" {
+  #  formats html
+  #  center '<[report id="accreport"]>'
+  #}
+
+  textreport resources "Resources" {
+    formats html
+    center '<[report id="resourcesrep"]>'
+  }
+}
+
+accountreport accreport "Cash Flow" {
+  formats html
+  #hideaccount income
+  header -8<-
+    === Cash Flow Analysis (Profit and Loss) ===
+  ->8-
+  columns no, name, turnover, monthly
+}
+
+resourcereport resourcesrep "Resource Report" {
+  formats html
+  header -8<-
+    === Resource Report ===
+  ->8-
+  columns no, name, duration, daily
+}
+
+taskreport public "" {
+  header -8<-
+    === Project Overview ===
+
+    Project is divded into major milestones
+    # Approvals
+    # Base Construction
+    # Ready for Occupation
+
+    === Original Project Plan ===
+  ->8-
+  columns bsi { title  'WBS' }, name, start, end, effort, cost, revenue, chart { ${TaskTip} }
+
+  timeformat "%a %Y-%m-%d"
+  loadunit days
+  hideresource @all
+  hidetask income
+  balance cost rev
+  caption 'All effort values are in man days.'
+  
+  footer -8<-
+    === Staffing ===
+
+    All project phases are properly staffed. See [[ResourceGraph]] for
+    detailed resource allocations.
+
+    === Current Status ===
+
+  ->8-
+}
+
+taskreport overview "" {
+  header -8<-
+    === Project Overview ===
+
+    The project is structured into 3 phases.
+
+    # Specification
+    # <-reportlink id='frame.index'->
+    # Testing
+
+    === Original Project Plan ===
+  ->8-
+  columns bsi { title  'WBS' }, name, start, end, effort, cost, revenue, chart { ${TaskTip} }
+
+  timeformat "%a %Y-%m-%d"
+  loadunit days
+  hideresource @all
+  hidetask income
+  balance cost rev
+  caption 'All effort values are in man days.'
+  
+  footer -8<-
+    === Staffing ===
+
+    All project phases are properly staffed. See [[ResourceGraph]] for
+    detailed resource allocations. See [[Cash Flow]] for money.
+
+    === Current Status ===
+
+    The project started off with a delay of 4 days. This slightly affected
+    the original schedule. See [[Deliveries]] for the impact on the delivery
+    dates.
+  ->8-
+}

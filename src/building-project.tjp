@@ -1,0 +1,76 @@
+macro TaskTip [
+  tooltip istask() -8<-
+    '''Start: ''' <-query attribute='start'->
+    '''End: ''' <-query attribute='end'->
+    ----
+    '''Resources:'''
+    
+    <-query attribute='resources'->
+    ----
+    '''Precursors: '''
+
+    <-query attribute='precursors'->
+    ----
+    '''Followers: '''
+
+    <-query attribute='followers'->
+    ->8-
+]
+
+project building "Building Project" 2025-11-01 - 2027-12-30 {
+  timezone "Asia/Kolkata"
+  currency "INR"
+  timeformat "%Y-%m-%d"
+
+  numberformat "-" "" "," "." 1
+  currencyformat "(" ")" "," "." 0
+
+  #now 2025-06-02-13:00
+
+  scenario plan "Plan" {
+    scenario delayed "Delayed"
+  }
+}
+
+flags income
+
+account cost "Project Cost" {
+  account govt "Government Costs"
+  account utilities "Utilities"
+  account contractor "Contracter"
+  account installationcost "Installation Costs"
+  account livingexpenses "Living Expenses"
+  account reserve "Reserve Cash"
+  account loan "Loan"
+  account loaninterest "Loan Interest"
+}
+
+account rev "Revenue" {
+  flags income
+  account capital "Capital"
+  account income "Rental Income"
+  account loaninput "Input Loan"
+  account advance "Advance"
+}
+
+balance cost rev
+
+resource suresh "Contractor (Suresh)" {
+}
+
+resource hemanth "Hemanth" {
+}
+
+resource thejus "Thejus" {
+}
+
+
+include "construction.tji"
+
+include "assets.tji"
+
+include "monthly-income-expenses.tji"
+
+include "loan.tji"
+
+include "reporting.tji"

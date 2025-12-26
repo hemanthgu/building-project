@@ -1,0 +1,218 @@
+
+task Complex "Building Project" {
+
+  task approvals "Approval Milestones" {
+    purge chargeset
+    chargeset govt
+
+    task planapprovaldur "Village Pachayat Planning" {
+      start ${projectstart}
+      duration 3w
+    }
+
+    task planapproval "Planning Approval - Village Panchayat" {
+      depends !planapprovaldur
+      charge 500000.00 onend
+    }
+
+    task govtsurveydur "Survey" {
+      start ${projectstart}
+      duration 3w
+    }
+
+    task govtsurvey "Govt Survey" {
+      depends !govtsurveydur
+      charge 15000.00 onend
+    }
+  }
+
+  task utilitiesmile "Utilities" {
+    purge chargeset
+    chargeset utilities
+    
+    depends !approvals
+
+    task bescomdur "Bescom Approvals" {
+      depends !!installation.transformer
+      duration 4w
+    }
+
+    task bescom "Bescom" {
+      depends !bescomdur
+      charge 150000.00 onend
+    }
+
+    task firesanctionsdur "Fire Sanctions" {
+      depends !!deliveries.finalwork
+      duration 1m
+    }
+
+    task firesanctions "Fire Sanctions Approval" {
+      depends !firesanctionsdur
+      charge 0.00 onend
+    }
+
+    task constructionelectricitydur "Construction Elec Approvals" {
+      depends !!approvals.planapprovaldur
+      duration 2w
+    }
+
+    task constructionelectricity "Electricity for Construction" {
+      depends !constructionelectricitydur
+      charge 100000.00 onend
+    }
+  }
+
+  task installation "Installations" {
+    purge chargeset
+    chargeset installationcost
+
+    depends !approvals
+
+    task borewelldur "Borewell and Pumps" {
+      depends !!approvals.planapprovaldur
+      duration 1w
+    }
+
+    task borewell "Borewell and Pumps" {
+      depends !borewelldur
+      charge 600000.00 onend
+    }
+
+    task liftinstallation "Lift Installation" {
+      depends !!deliveries.plumbingwork
+      duration 1m
+    }
+
+    task lift "Lift Installed" {
+      depends !liftinstallation
+      charge 4500000.00 onend
+    }
+
+    task genset "Generator (60 KvA)" {
+      depends !!deliveries.plumbingwork
+      charge 1000000.00 onend
+    }
+
+    task transformer "Transformers" {
+      depends !!deliveries.plumbingwork
+      charge 150000.00 onend
+    }
+
+    task cctvcam "CCTV cameras" {
+      depends !!deliveries.plumbingwork
+      charge 500000.00 onend
+    }
+
+  }
+
+  task deliveries "Construction Milestones" {
+    purge chargeset
+    chargeset contractor
+    depends !approvals
+
+    task start "Project Mobilization" {
+      charge 6750000.00 onstart
+    }
+
+    task foundationdur "Foundation Work" {
+      depends !start, !!approvals.planapprovaldur, !!approvals.govtsurvey
+      duration 5m
+    }
+
+    task foundation "Foundation Complete" {
+      depends !foundationdur
+      charge 4500000.00 onend
+    }
+
+    task firstroofdur "Work towards First Roof" {
+      depends !foundation
+      duration 2m
+    }
+
+    task firstroof "First Roof Complete" {
+      depends !firstroofdur
+      charge 6750000.00 onend
+    }
+
+    task secondroofdur "Work towards Second Roof" {
+      depends !firstroof
+      duration 1.5m
+    }
+
+    task secondroof "Second Roof Complete" {
+      depends !secondroofdur
+      charge 6750000.00 onend
+    }
+
+    task thirdroofdur "Work towards Third Roof" {
+      depends !secondroof
+      duration 1.5m
+    }
+
+    task thirdroof "Third Roof Complete" {
+      depends !thirdroofdur
+      charge 6750000.00 onend
+    }
+
+    task blockworkdur "Block Work" {
+      depends !thirdroof
+      duration 1m
+    }
+
+    task blockwork "Block Work Complete" {
+      depends !blockworkdur
+      charge 2250000.00 onend
+    }
+
+    task plumbingworkdur "Electrical and Plumping Work" {
+      depends !blockwork
+      duration 1m
+    }
+
+    task plumbingwork "Plumbing and Electrical Work Complete" {
+      depends !plumbingworkdur
+      charge 2250000.00 onend
+    }
+
+    task plasteringworkdur "Inside and Outside Plastering Work" {
+      depends !plumbingwork
+      duration 1m
+    }
+
+    task plasteringwork "Inside and Outside Plastering Work Complete" {
+      depends !plasteringworkdur
+      charge 2250000.00 onend
+    }
+
+    task tilesworkdur "Tiles Work" {
+      depends !plasteringwork
+      duration 1m
+    }
+
+    task tileswork "Tiles Work Complete" {
+      depends !tilesworkdur
+      charge 2250000.00 onend
+    }
+
+    task paintingworkdur "Painting Work Complete" {
+      depends !tileswork
+      duration 1m
+    }
+    
+    task paintingwork "Painting Work Complete" {
+      depends !paintingworkdur
+      charge 2250000.00 onend
+    }
+
+    task finalworkdur "Remining Work Complete" {
+      depends !paintingwork
+      duration 1m
+    }
+
+    task finalwork "Remining Work Complete" {
+      depends !finalworkdur
+      charge 2250000.00 onend
+    }
+  }
+}
