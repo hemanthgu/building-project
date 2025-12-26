@@ -1,0 +1,46 @@
+name: Build Project Plan
+on: [push]
+
+jobs:
+  build_report_and_upload:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Show OS info
+        run: |
+          uname -a
+          cat /etc/os-release
+      - name: Update APT
+        run: |
+          sudo apt-get update
+
+      - name: Install ruby
+        run: sudo apt-get install ruby-full
+
+      - name : Install Taskjuggler
+        run: sudo gem install taskjuggler
+
+      - name: Check Taskjuggler
+        run: |
+          tj3 --version
+
+      - name: List all files
+        run: |
+          find .
+          mkdir build
+          cat > build/result.html << EOF
+          <!doctype html>
+          <html>
+          <head> <title>This is the title of the webpage!</title> </head>
+          <body> <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p> </body>
+          </html>
+          EOF
+      - name: Upload TJ Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-plan-tj-report
+          path: build/
+          retention-days: 30
+
