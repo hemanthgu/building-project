@@ -8,6 +8,7 @@ task Complex "Building Project" {
     task planapprovaldur "Village Pachayat Planning" {
       start ${projectstart}
       duration 3w
+      complete 100
     }
 
     task planapproval "Planning Approval - Village Panchayat" {
@@ -18,6 +19,7 @@ task Complex "Building Project" {
     task govtsurveydur "Survey" {
       start ${projectstart}
       duration 3w
+      complete 0
     }
 
     task govtsurvey "Govt Survey" {

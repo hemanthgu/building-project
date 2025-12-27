@@ -59,6 +59,7 @@ taskreport public "" {
   hideresource @all
   hidetask income
   balance cost rev
+  #scenarios plan, delayed
   caption 'All effort values are in man days.'
   
   footer -8<-
@@ -91,6 +92,7 @@ taskreport overview "" {
   hideresource @all
   hidetask income
   balance cost rev
+  scenarios plan, delayed
   caption 'All effort values are in man days.'
   
   footer -8<-
